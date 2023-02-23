@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "new-admin-panel-sprint-3"
+version = "0.1.0"
+description = ""
+authors = [""]
+readme = "README.md"
+packages = [{include = "new_admin_panel_sprint_3"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+async-timeout = "^4.0.2"
+redis = "^4.5.1"
+elasticsearch = "^8.6.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+click = "^8.0.4"
+dpath = "^2.1.4"
+# linters
+black = "^22.8.0"
+flake8 = "^6.0.0"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+target-version = ['py39']
+include = '\.pyi?$'
+exclude = '''
+/(
+   venv
+)/
+'''
+
+[tool.isort]
+line_length = 79
+combine_as_imports = true
+include_trailing_comma = true
+lines_after_imports = 2
+skip = ["venv",]
