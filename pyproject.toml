@@ -10,7 +10,10 @@ packages = [{include = "new_admin_panel_sprint_3"}]
 python = "^3.10"
 async-timeout = "^4.0.2"
 redis = "^4.5.1"
-elasticsearch = "^8.6.2"
+elasticsearch = "^7.17.9"
+elasticsearch-dsl = "^7.4.0"
+psycopg2-binary = "2.9.5"
+pydantic = "^1.10.5"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -28,7 +31,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 79
-target-version = ['py39']
+target-version = ['py310']
 include = '\.pyi?$'
 exclude = '''
 /(

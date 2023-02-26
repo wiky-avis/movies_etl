@@ -1,5 +1,12 @@
 version: "3"
 services:
+    etl:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+            - elasticsearch
     db:
         image: postgres:13.0-alpine
         restart: always
@@ -25,17 +32,7 @@ services:
             - elasticsearch_data:/usr/share/elasticsearch/data
         networks:
             - local-dev
-    redis:
-        restart: on-failure
-        image: redis:7.0.8-alpine
-        command: redis-server
-        ports:
-            - "6379:6379"
-        volumes:
-            - redis-data:/data
-            - redis-conf:/usr/local/etc/redis/redis.conf
-        networks:
-            - local-dev
+
 
 volumes:
     elasticsearch_data:
