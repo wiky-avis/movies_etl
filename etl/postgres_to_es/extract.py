@@ -8,7 +8,13 @@ from etl.common.decorators import backoff
 from etl.common.storage import JsonFileStorage, State
 from etl.models.film_work import FilmWorkLoad
 from etl.settings.const import CHANK, DEFAULT_DATE
-from etl.settings.sql import GET_PERSONS, GET_GENRES, GET_MOVIES, GET_FILM_WORKS_IDS, GET_FILM_WORKS
+from etl.settings.sql import (
+    GET_FILM_WORKS,
+    GET_FILM_WORKS_IDS,
+    GET_GENRES,
+    GET_MOVIES,
+    GET_PERSONS,
+)
 
 
 class PostgresExtractor:

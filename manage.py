@@ -51,7 +51,7 @@ def cli():
 @cli.command("run")
 def run():
     with Elasticsearch(**ES_DSL) as es_conn, psycopg2.connect(
-            **PG_DSL, cursor_factory=DictCursor
+        **PG_DSL, cursor_factory=DictCursor
     ) as pg_conn:
         daemon = ETLManager(pg_conn, es_conn)
         daemon.run()
