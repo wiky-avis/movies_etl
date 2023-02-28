@@ -11,7 +11,7 @@ services:
             - POSTGRES_DB=movies_database
             - PGDATA=/var/lib/postgresql/data
         ports:
-            - "5432:5432"
+            - "${DB_PORT}:${DB_PORT}"
         env_file:
             - .env
         networks:
@@ -24,7 +24,7 @@ services:
             - "xpack.security.enabled=false"
             - "USE_SSL=false"
         ports:
-            - "9200:9200"
+            - "${ES_PORT}:${ES_PORT}"
         volumes:
             - elasticsearch_data:/usr/share/elasticsearch/data
         env_file:
@@ -35,6 +35,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        restart: always
         depends_on:
             - db
             - elasticsearch

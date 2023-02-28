@@ -5,7 +5,6 @@ import psycopg2
 
 from etl.common.resources import ResourcesMixin
 from etl.models.film_work import FilmWorkLoad
-from etl.settings.const import CHANK, DEFAULT_DATE
 from etl.postgres_to_es.sql import (
     GET_FILM_WORKS,
     GET_FILM_WORKS_IDS,
@@ -13,6 +12,7 @@ from etl.postgres_to_es.sql import (
     GET_MOVIES,
     GET_PERSONS,
 )
+from etl.settings.const import CHANK, DEFAULT_DATE
 
 
 class PostgresExtractor(ResourcesMixin):
