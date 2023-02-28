@@ -1,12 +1,5 @@
 version: "3"
 services:
-    etl:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        depends_on:
-            - db
-            - elasticsearch
     db:
         image: postgres:13.0-alpine
         restart: always
@@ -17,27 +10,42 @@ services:
             - POSTGRES_PASSWORD=123qwe
             - POSTGRES_DB=movies_database
             - PGDATA=/var/lib/postgresql/data
-        networks:
-            - local-dev
         ports:
             - "5432:5432"
+        env_file:
+            - .env
+        networks:
+            - local-dev
     elasticsearch:
         image: elasticsearch:7.17.9
         environment:
             - "ES_JAVA_OPTS=-Xms200m -Xmx200m"
             - "discovery.type=single-node"
+            - "xpack.security.enabled=false"
+            - "USE_SSL=false"
         ports:
             - "9200:9200"
         volumes:
             - elasticsearch_data:/usr/share/elasticsearch/data
+        env_file:
+            - .env
+        networks:
+            - local-dev
+    etl:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+            - elasticsearch
+        env_file:
+            - .env
         networks:
             - local-dev
 
 
 volumes:
     elasticsearch_data:
-    redis-data:
-    redis-conf:
     pgdata:
 
 networks:

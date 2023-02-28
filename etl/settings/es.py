@@ -1,6 +1,10 @@
-ES_DSL = {
-    "default": {"hosts": "localhost:9200"},
-}
+import os
+
+
+ES_HOST = os.environ.get("ES_HOST", "localhost")
+ES_PORT = int(os.getenv("ES_PORT", 9200))
+
+ES_DSL = {"hosts": [f"http://{ES_HOST}:" f"{ES_PORT}"]}
 
 INDEX = "movies"
 
