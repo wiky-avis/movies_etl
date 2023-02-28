@@ -2,26 +2,17 @@ import logging
 import time
 
 import click
-import psycopg2
-from elasticsearch import Elasticsearch
-from psycopg2._psycopg import connection as _connection
-from psycopg2.extras import DictCursor
 
 from etl.postgres_to_es.extract import PostgresExtractor
 from etl.postgres_to_es.load import ElasticsearchLoader
 from etl.settings.const import SLEEP
-from etl.settings.es import ES_DSL, INDEX
-from etl.settings.pg import PG_DSL
+from etl.settings.es import INDEX
 
 
 class ETLManager:
-    def __init__(self, pg_conn: _connection, es_conn: Elasticsearch):
-        self.pg_conn = pg_conn
-        self.es_conn = es_conn
-
     def daemonize(self):
-        pg = PostgresExtractor(self.pg_conn)
-        es = ElasticsearchLoader(self.es_conn)
+        pg = PostgresExtractor()
+        es = ElasticsearchLoader()
         es.create_index(INDEX)
 
         while True:
@@ -50,11 +41,8 @@ def cli():
 
 @cli.command("run")
 def run():
-    with Elasticsearch(**ES_DSL) as es_conn, psycopg2.connect(
-        **PG_DSL, cursor_factory=DictCursor
-    ) as pg_conn:
-        daemon = ETLManager(pg_conn, es_conn)
-        daemon.run()
+    daemon = ETLManager()
+    daemon.run()
 
 
 if __name__ == "__main__":
