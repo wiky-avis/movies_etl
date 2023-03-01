@@ -26,7 +26,7 @@ class ETLManager:
             for ids in [
                 pg_extractor.get_ids_film_work_by_person(),
                 pg_extractor.get_ids_film_work_by_genre(),
-                pg_extractor.get_modified_film_works(),
+                pg_extractor.get_ids_film_works(),
             ]:
                 data = pg_extractor.extract_movies(ids)
 

@@ -52,7 +52,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_modified_film_works(self):
+    def get_ids_film_works(self):
         modified_dt = (
             self.resources.state.get_state("film_works") or DEFAULT_DATE
         )

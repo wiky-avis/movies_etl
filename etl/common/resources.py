@@ -15,7 +15,7 @@ from etl.settings.pg import PG_DSL
 @dataclass
 class Resources:
     es_client: Optional[Elasticsearch] = None
-    pg_conn: [_connection] = None
+    pg_conn: Optional[_connection] = None
     state: Optional[State] = None
 
 
