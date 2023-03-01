@@ -1,15 +1,6 @@
-from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
-
-
-class TableName(str, Enum):
-    FILM_WORK = "film_work"
-    PERSON = "person"
-    GENRE = "genre"
-    GENRE_FILM_WORK = "genre_film_work"
-    PERSON_FILM_WORK = "person_film_work"
 
 
 class FilmWorkLoad(BaseModel):

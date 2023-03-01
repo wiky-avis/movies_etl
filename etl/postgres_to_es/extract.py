@@ -73,7 +73,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_modified_film_works_ids_by_person(self):
+    def get_ids_film_work_by_person(self):
         table_name, colum, ids = (
             "person_film_work",
             "person_id",
@@ -101,7 +101,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_modified_film_works_ids_by_genre(self):
+    def get_ids_film_work_by_genre(self):
         table_name, colum, ids = (
             "genre_film_work",
             "genre_id",

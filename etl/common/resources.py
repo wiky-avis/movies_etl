@@ -6,7 +6,6 @@ from elasticsearch import Elasticsearch
 from psycopg2._psycopg import connection as _connection
 from psycopg2.extras import DictCursor
 
-from etl.common.decorators import backoff
 from etl.common.storage import JsonFileStorage, State
 from etl.settings.const import FILE_NAME
 from etl.settings.es import ES_DSL
@@ -29,10 +28,8 @@ class ResourcesMixin:
             state=State(JsonFileStorage(FILE_NAME)),
         )
 
-    @backoff()
     def get_es_client(self):
         return self.resources.es_client
 
-    @backoff()
     def get_pg_conn(self) -> _connection:
         return self.resources.pg_conn

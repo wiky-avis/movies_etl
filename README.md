@@ -3,6 +3,7 @@
 Ваша задача в этом уроке — загрузить данные в Elasticsearch из PostgreSQL. Подробности задания в папке `etl`.
 
 
+## Запуск
 - Создать env файл
 ```bash
 cp .env.example .env
