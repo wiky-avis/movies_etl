@@ -1,5 +1,5 @@
 import logging
-from typing import Iterator, List
+from typing import Iterator, List, Optional
 
 import psycopg2
 
@@ -16,7 +16,7 @@ from etl.settings.const import CHANK, DEFAULT_DATE
 
 
 class PostgresExtractor(ResourcesMixin):
-    def get_modified_persons(self):
+    def get_modified_persons(self) -> Optional[tuple]:
         modified_dt = self.resources.state.get_state("persons") or DEFAULT_DATE
         with self.get_pg_conn().cursor() as cursor:
             cursor.execute(GET_PERSONS, (modified_dt,))
@@ -34,7 +34,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_modified_genres(self):
+    def get_modified_genres(self) -> Optional[tuple]:
         modified_dt = self.resources.state.get_state("genres") or DEFAULT_DATE
         with self.get_pg_conn().cursor() as cursor:
             cursor.execute(GET_GENRES, (modified_dt,))
@@ -52,7 +52,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_ids_film_works(self):
+    def get_ids_film_works(self) -> Optional[tuple]:
         modified_dt = (
             self.resources.state.get_state("film_works") or DEFAULT_DATE
         )
@@ -73,7 +73,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_ids_film_work_by_person(self):
+    def get_ids_film_work_by_person(self) -> Optional[tuple]:
         table_name, colum, ids = (
             "person_film_work",
             "person_id",
@@ -101,7 +101,7 @@ class PostgresExtractor(ResourcesMixin):
 
             return tuple(record[0] for record in records)
 
-    def get_ids_film_work_by_genre(self):
+    def get_ids_film_work_by_genre(self) -> Optional[tuple]:
         table_name, colum, ids = (
             "genre_film_work",
             "genre_id",

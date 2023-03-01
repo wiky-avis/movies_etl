@@ -8,7 +8,7 @@ from psycopg2 import OperationalError
 from etl.postgres_to_es.extract import PostgresExtractor
 from etl.postgres_to_es.load import ElasticsearchLoader
 from etl.settings.const import SLEEP
-from etl.settings.es import INDEX
+from etl.settings.es import INDEX, MAPPINGS, SETTINGS
 
 
 class ETLManager:
@@ -20,7 +20,9 @@ class ETLManager:
     def daemonize(self):
         pg_extractor = PostgresExtractor()
         es_loader = ElasticsearchLoader()
-        es_loader.create_index(INDEX)
+        es_loader.create_index(
+            index=INDEX, settings=SETTINGS, mappings=MAPPINGS
+        )
 
         while True:
             for ids in [
