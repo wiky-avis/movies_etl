@@ -32,4 +32,4 @@ class ElasticsearchLoader(ResourcesMixin):
         )
         if errors:
             logging.error("Migration failed: %s", errors)
-        print(processed, errors)
+        logging.info("Migration: processed %s errors %s", processed, errors)
